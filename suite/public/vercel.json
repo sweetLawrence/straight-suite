@@ -1,0 +1,11 @@
+{
+  "rewrites": [
+    { "source": "/inventory/:path*", "destination": "/inventory/index.html" },
+    { "source": "/bookings/:path*", "destination": "/bookings/index.html" }
+  ],
+  "headers": [
+    { "source": "/(index.html|sw.js|config.js)", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
+    { "source": "/inventory/(index.html|sw.js)", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
+    { "source": "/bookings/(index.html|sw.js)", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] }
+  ]
+}

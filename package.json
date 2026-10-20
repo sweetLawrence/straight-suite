@@ -1,0 +1,10 @@
+{
+  "name": "straight-suite-workspace",
+  "private": true,
+  "scripts": {
+    "gateway": "bash scripts/build-all.sh",
+    "serve": "npx --yes serve gateway -l 5170",
+    "dev:suite": "pnpm -C suite dev",
+    "tauri": "pnpm -C suite tauri"
+  }
+}

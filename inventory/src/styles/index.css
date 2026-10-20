@@ -1,0 +1,539 @@
+@tailwind components;
+@tailwind utilities;
+
+/* Small overrides on top of Mantine */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+}
+
+
+
+
+
+
+
+
+
+/* ═══════════════════════════════════════════════════════════════
+   KITCHEN ISSUE SLIP
+   ═══════════════════════════════════════════════════════════════ */
+
+.slip {
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #000;
+  background: #fff;
+  max-width: 380px;      /* thermal 80mm ≈ 300-380px in browser */
+  margin: 20px auto;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+}
+
+/* ── Header ── */
+.slip-header {
+  text-align: center;
+  border-bottom: 2px solid #000;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.slip-logo {
+  max-width: 90px;
+  max-height: 60px;
+  display: block;
+  margin: 0 auto 6px;
+}
+
+.slip-property-name {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.slip-property-sub {
+  font-size: 11px;
+  margin-top: 1px;
+  color: #333;
+}
+
+.slip-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-top: 8px;
+}
+
+.slip-ref {
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+/* ── Meta ── */
+.slip-meta {
+  border-bottom: 1px dashed #000;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.slip-meta-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.slip-meta-label {
+  font-weight: 600;
+}
+
+.slip-meta-value {
+  text-align: right;
+}
+
+/* ── Lines ── */
+.slip-lines {
+  margin-bottom: 12px;
+}
+
+.slip-group {
+  margin-bottom: 10px;
+}
+
+.slip-group-header {
+  font-weight: 700;
+  font-size: 13px;
+  background: #f0f0f0;
+  padding: 4px 6px;
+  border-left: 3px solid #000;
+  margin-bottom: 4px;
+}
+
+.slip-group-note {
+  font-size: 12px;
+  padding: 2px 0 4px;
+}
+.slip-group-qty {
+  font-weight: 700;
+}
+
+.slip-group-lines {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.slip-group-lines td {
+  padding: 2px 6px;
+  font-size: 12px;
+  vertical-align: top;
+}
+
+.slip-qty {
+  width: 45px;
+  text-align: right;
+  font-weight: 700;
+}
+
+.slip-item {
+  text-align: left;
+}
+
+.slip-unit {
+  width: 60px;
+  text-align: right;
+  color: #555;
+  font-size: 11px;
+}
+
+/* ── Footer ── */
+.slip-footer {
+  border-top: 2px solid #000;
+  padding-top: 8px;
+  margin-top: 12px;
+  font-size: 11px;
+}
+
+.slip-footer-line {
+  margin-bottom: 2px;
+}
+
+.slip-signature {
+  margin-top: 14px;
+  padding-top: 8px;
+  border-top: 1px dashed #000;
+}
+
+.slip-signature-line {
+  margin-top: 10px;
+  font-size: 11px;
+}
+
+.slip-end {
+  text-align: center;
+  font-size: 10px;
+  margin-top: 12px;
+  letter-spacing: 1px;
+  color: #555;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PRINT RULES
+   ═══════════════════════════════════════════════════════════════ */
+
+@media print {
+  .slip,
+  .slip * {
+    visibility: visible;
+  }
+  .slip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 4mm;
+    max-width: 100%;
+    border: none;
+    box-shadow: none;
+  }
+
+  /* Hide the toolbar */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Thermal 80mm — narrow roll */
+  @page {
+    size: 80mm auto;
+    margin: 3mm;
+  }
+
+  /* Force monochrome */
+  .slip-group-header {
+    background: #fff !important;
+    border-left: 2px solid #000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* For A4 printers, remove the @page override by targeting a specific class
+   (optional — if you later want per-printer classes) */
+
+
+
+
+
+/* ═══════════════════════════════════════════════════════════════
+   BILL / RECEIPT
+   ═══════════════════════════════════════════════════════════════ */
+
+.bill {
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #000;
+  background: #fff;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 14px 16px;
+  border: 1px solid #ddd;
+}
+
+/* ── Header ── */
+.bill-header {
+  text-align: center;
+  border-bottom: 2px solid #000;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.bill-logo {
+  max-width: 90px;
+  max-height: 60px;
+  display: block;
+  margin: 0 auto 6px;
+}
+
+.bill-property-name {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.bill-property-sub {
+  font-size: 11px;
+  margin-top: 1px;
+  color: #333;
+}
+
+.bill-doc-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-top: 10px;
+}
+
+.bill-ref {
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+/* ── Meta ── */
+.bill-meta {
+  border-bottom: 1px dashed #000;
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+
+.bill-meta-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.bill-meta-label {
+  font-weight: 600;
+}
+
+.bill-meta-value {
+  text-align: right;
+}
+
+/* ── Lines ── */
+.bill-lines {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 12px;
+}
+
+.bill-lines th {
+  text-align: left;
+  border-bottom: 1px solid #000;
+  padding: 4px 2px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bill-lines td {
+  padding: 4px 2px;
+  font-size: 12px;
+  vertical-align: top;
+  border-bottom: 1px dotted #ccc;
+}
+
+.bill-lines td.center {
+  text-align: center;
+}
+
+.bill-lines td.right {
+  text-align: right;
+}
+
+.bill-lines td.strong {
+  font-weight: 700;
+}
+
+/* ── Totals ── */
+.bill-totals {
+  border-top: 1px dashed #000;
+  padding-top: 8px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.bill-total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 0;
+}
+
+.bill-discount-reason {
+  font-size: 11px;
+  color: #555;
+}
+
+.bill-negative {
+  color: #c00;
+}
+
+.bill-grand-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0 4px;
+  border-top: 2px solid #000;
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ── Payment ── */
+.bill-payment {
+  border-top: 1px dashed #000;
+  padding-top: 8px;
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+
+.bill-payment-title {
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  font-size: 11px;
+}
+
+.bill-payment-note {
+  font-size: 11px;
+  color: #666;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* ── Footer ── */
+.bill-footer {
+  border-top: 2px solid #000;
+  padding-top: 10px;
+  margin-top: 12px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.bill-footer-line {
+  margin-bottom: 3px;
+}
+
+.bill-thanks-small {
+  font-size: 10px;
+  color: #555;
+  margin-top: 6px;
+}
+
+.bill-end {
+  text-align: center;
+  font-size: 10px;
+  margin-top: 12px;
+  letter-spacing: 1px;
+  color: #555;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PRINT RULES (extends the slip print rules)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media print {
+  .bill,
+  .bill * {
+    visibility: visible;
+  }
+  .bill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 4mm;
+    max-width: 100%;
+    border: none;
+    box-shadow: none;
+  }
+
+  .bill-grand-total {
+    border-top: 2px solid #000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .bill-negative {
+    color: #000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+
+
+
+
+/* Prevent iOS bounce on the tab bar */
+html,
+body {
+  overscroll-behavior-y: none;
+}
+
+/* Better tap targets */
+@media (max-width: 767px) {
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+/* ─── Phones: modals open as bottom sheets ─────────────────────────
+   Full width, pinned to the bottom, body scrolls, and the action row
+   (Cancel / Save) stays visible at the bottom while you scroll. */
+@media (max-width: 767px) {
+  .mantine-Modal-inner {
+    padding: 0 !important;
+    align-items: flex-end !important;
+  }
+  .mantine-Modal-content {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    max-height: 92dvh !important;
+    border-radius: 16px 16px 0 0 !important;
+  }
+  .mantine-Modal-header {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #F1F3F5;
+  }
+  .mantine-Modal-body {
+    padding-top: 16px;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+  /* Action row: the last right-aligned button group in a modal */
+  .mantine-Modal-body .modal-actions,
+  .mantine-Modal-body .mantine-Group-root[style*='--group-justify: flex-end']:last-child {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    background: #FFFFFF;
+    margin-left: -16px;
+    margin-right: -16px;
+    margin-bottom: calc(-16px - env(safe-area-inset-bottom));
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    border-top: 1px solid #F1F3F5;
+    flex-wrap: nowrap;
+  }
+  .mantine-Modal-body .modal-actions > .mantine-Button-root,
+  .mantine-Modal-body .mantine-Group-root[style*='--group-justify: flex-end']:last-child > .mantine-Button-root {
+    flex: 1;
+  }
+  /* 16px inputs: stops iPhone zooming in when a field is tapped */
+  .mantine-Input-input,
+  .mantine-Textarea-input {
+    font-size: 16px !important;
+  }
+}
+
+/* Desktop side menu: hover (inline styles can't express :hover) */
+.app-nav-link:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #FFFFFF !important;
+}
+.app-nav-link[data-active]:hover {
+  background: rgba(59, 130, 246, 0.22) !important;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

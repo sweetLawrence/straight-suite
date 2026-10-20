@@ -1,0 +1,47 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "Straight Suite",
+  "version": "0.2.0",
+  "identifier": "com.straightgroup.os",
+  "build": {
+    "devUrl": "http://localhost:5170",
+    "frontendDist": "../dist",
+    "beforeBuildCommand": "pnpm build"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "Straight Suite",
+        "width": 1440,
+        "height": 900,
+        "resizable": true,
+        "maximized": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "createUpdaterArtifacts": true,
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDIxRkEzQ0EwNUNEMEEyRDEKUldUUm90QmNvRHo2SWF5UTN5Vk5BMjBnbkNPWmlNQlJlSUJNVGgrNmpBQ28xRG52Rkt5SXpXcC8K",
+      "endpoints": [
+        "https://updates.mumsgarden.co.ke/latest.json"
+      ]
+    }
+  }
+}

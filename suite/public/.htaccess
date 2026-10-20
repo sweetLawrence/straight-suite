@@ -1,0 +1,15 @@
+# For cPanel (Apache). Goes into the same folder as index.html.
+RewriteEngine On
+
+# Refreshing a page inside either app loads that app, not a 404
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^inventory/ /inventory/index.html [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^bookings/ /bookings/index.html [L]
+
+# Always fetch the newest app shell and service workers
+<FilesMatch "(^|/)(index\.html|sw\.js|config\.js)$">
+  Header set Cache-Control "no-cache"
+</FilesMatch>

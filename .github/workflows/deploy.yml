@@ -1,0 +1,56 @@
+name: Build and deploy the Straight Suite website
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # Repo variables (Settings > Secrets and variables > Actions > Variables)
+      SUITE_URL: ${{ vars.SUITE_URL }}
+      INVENTORY_API_URL: ${{ vars.INVENTORY_API_URL }}
+      BOOKING_API_URL: ${{ vars.BOOKING_API_URL }}
+      # Optional secrets: Vercel publishing
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Build the Suite and both apps into gateway
+        run: bash scripts/build-all.sh
+
+      # Always available: download the finished website from the run page
+      - name: Keep the finished website
+        uses: actions/upload-artifact@v4
+        with:
+          name: gateway
+          path: gateway
+          include-hidden-files: true
+
+      - name: Publish to Vercel
+        if: ${{ env.VERCEL_TOKEN != '' }}
+        run: npx --yes vercel deploy gateway --prod --yes --token "$VERCEL_TOKEN"
+
+      # Turn on later: set the repo variable DEPLOY_CPANEL to true and add FTP_HOST, FTP_USERNAME, FTP_PASSWORD secrets
+      - name: Publish to the cPanel domain
+        if: ${{ vars.DEPLOY_CPANEL == 'true' }}
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ vars.CPANEL_DIR || './' }}
+          local-dir: gateway/

@@ -1,0 +1,177 @@
+name: Straight Suite Release Pipeline
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: suite
+    env:
+      SUITE_URL: ${{ vars.SUITE_URL }}
+      INVENTORY_API_URL: ${{ vars.INVENTORY_API_URL }}
+      BOOKING_API_URL: ${{ vars.BOOKING_API_URL }}
+
+
+    steps:
+       
+      # 1. Checkout the released tag
+       
+      - name: Checkout release
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+       
+      # 2. Setup pnpm
+       
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+       
+      # 3. Setup Node
+       
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+       
+      # 4. Set version from GitHub Release
+       
+      - name: Set release version
+        shell: pwsh
+        run: |
+          $version = "${{ github.event.release.tag_name }}" -replace '^v', ''
+
+          Write-Host "Release version: $version"
+
+          $configPath = "src-tauri/tauri.conf.json"
+
+          $config = Get-Content $configPath -Raw | ConvertFrom-Json
+
+          $config.version = $version
+
+          $config | ConvertTo-Json -Depth 20 | Set-Content $configPath -Encoding UTF8
+
+          Write-Host "Updated Tauri version to $version"
+
+       
+      # 5. Install dependencies
+       
+      - name: Install dependencies
+        run: pnpm install
+
+      # The installed app opens the website at SUITE_URL, so that address is saved inside it
+      - name: Write the Suite addresses
+        shell: bash
+        run: bash ../scripts/write-config.sh public/config.js
+
+       
+      # 6. Build + sign Tauri
+       
+      - name: Build Tauri application
+        run: pnpm tauri build
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+
+       
+      # 7. Generate latest.json
+       
+      - name: Generate latest.json
+        shell: pwsh
+        run: |
+          $nsisDir = "src-tauri/target/release/bundle/nsis"
+
+          $exe = Get-ChildItem "$nsisDir/*-setup.exe" |
+            Select-Object -First 1
+
+          $sig = Get-ChildItem "$nsisDir/*-setup.exe.sig" |
+            Select-Object -First 1
+
+          if (-not $exe) {
+            throw "NSIS installer not found."
+          }
+
+          if (-not $sig) {
+            throw "NSIS signature file not found."
+          }
+
+          Write-Host "Installer:"
+          Write-Host $exe.FullName
+
+          Write-Host "Signature:"
+          Write-Host $sig.FullName
+
+          # Read the Tauri signature
+          $signature = (Get-Content $sig.FullName -Raw).Trim()
+
+          # Get version from release
+          $version = "${{ github.event.release.tag_name }}" -replace '^v', ''
+
+          Write-Host "Release version: $version"
+
+          # URL encode filename
+          $encodedFileName = [System.Uri]::EscapeDataString($exe.Name)
+
+          $downloadUrl = "https://updates.mumsgarden.co.ke/releases/$encodedFileName"
+
+          $latest = @{
+            version = $version
+            notes = "${{ github.event.release.name }}"
+            pub_date = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+            platforms = @{
+              "windows-x86_64" = @{
+                signature = $signature
+                url = $downloadUrl
+              }
+            }
+          }
+
+          $json = $latest | ConvertTo-Json -Depth 10
+
+          Set-Content `
+            -Path "latest.json" `
+            -Value $json `
+            -Encoding UTF8
+
+          Write-Host ""
+          Write-Host "Generated latest.json:"
+          Write-Host $json
+
+       
+      # 8. Upload NSIS installer + signature
+       
+      - name: Upload NSIS updater files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ./releases/
+          local-dir: suite/src-tauri/target/release/bundle/nsis/
+          exclude: |
+            **
+            !*-setup.exe
+            !*-setup.exe.sig
+
+       
+      # 9. Upload latest.json
+       
+      - name: Upload latest.json
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ./
+          local-dir: suite/
+          exclude: |
+            **
+            !latest.json

@@ -1,0 +1,607 @@
+[
+ {
+  "title": "The basics",
+  "terms": [
+   {
+    "t": "Property / branch",
+    "m": "One of the businesses in the group: Mums' Garden (MG) or Centurion (CEN). Most people see only their own branch. The MD and admin can see both.",
+    "w": "Top of the screen"
+   },
+   {
+    "t": "Trading day",
+    "m": "The business day, which runs from 6:00 am to 6:00 am the next morning (Nairobi time). A sale at 1:00 am still belongs to the day that started the previous morning. All daily figures follow the trading day, not the calendar date.",
+    "w": "Daily Summary, Dashboard"
+   },
+   {
+    "t": "Shift",
+    "m": "A work period within the trading day, for example morning or evening. Sales and cash are linked to the shift they were made in.",
+    "w": "Orders, Payments"
+   },
+   {
+    "t": "Reference (ref)",
+    "m": "The unique number the system gives to each record, for example ORD (order), PAY (payment) or BILL. Quote it when asking about a record.",
+    "w": "Everywhere"
+   },
+   {
+    "t": "Status",
+    "m": "Where a record is in its life. Common ones: open, paid, pending, approved, rejected, verified, closed.",
+    "w": "Everywhere"
+   },
+   {
+    "t": "Approval",
+    "m": "A manager or MD agreeing to something before or after it takes effect, such as a signed bill, a bar order, an adjustment or petty cash.",
+    "w": "Approvals"
+   },
+   {
+    "t": "Notification (alert)",
+    "m": "A message from the system that something needs your attention. On a phone it can also arrive as a push alert, even when the app is closed, if you switch alerts on.",
+    "w": "Alerts / Notifications"
+   }
+  ]
+ },
+ {
+  "title": "Orders and bills",
+  "terms": [
+   {
+    "t": "Order",
+    "m": "What a customer asked for at a table. A waiter adds items to it. The kitchen and the bar use it to prepare and issue the food and drinks.",
+    "w": "Orders"
+   },
+   {
+    "t": "Bill",
+    "m": "The amount the customer has to pay for an order. It is created from the order. An open bill is not yet paid. A paid bill is settled.",
+    "w": "Bills"
+   },
+   {
+    "t": "Net total",
+    "m": "The final amount of a bill after any discount.",
+    "w": "Bills"
+   },
+   {
+    "t": "Open bill",
+    "m": "A bill that has not been paid yet. At the end of the day the open bills are shown as 'Unsigned bills' on the Daily Summary.",
+    "w": "Bills, Daily Summary"
+   },
+   {
+    "t": "Discount",
+    "m": "An amount taken off a bill. It needs permission, and it is recorded so it can be checked later.",
+    "w": "Bills"
+   },
+   {
+    "t": "Guests paying later (pay later)",
+    "m": "A guest, often a room guest, whose bill is kept and settled later instead of at the table.",
+    "w": "Guests Paying Later"
+   },
+   {
+    "t": "Bar order approval",
+    "m": "Drinks from the bar are only counted as sold once the bar attendant issues them. Until then the bill cannot be paid for those items.",
+    "w": "Bar Orders, Approvals"
+   },
+   {
+    "t": "Signed bill / MD signing (house)",
+    "m": "A bill that the MD signs for instead of the customer paying. No money is collected. The waiter must type a signature note, and the branch manager approves it before the bill closes (the MD can change this to 'settle first, confirm later').",
+    "w": "Payments, Approvals"
+   }
+  ]
+ },
+ {
+  "title": "Payments",
+  "terms": [
+   {
+    "t": "Payment",
+    "m": "The record of money (or a signature) received for a bill.",
+    "w": "Payments"
+   },
+   {
+    "t": "Payment line / method",
+    "m": "One part of a payment. A bill can be split into several lines, for example part cash and part M-Pesa. Methods are cash, M-Pesa, card, other, cheque and house (signed bill).",
+    "w": "Payments"
+   },
+   {
+    "t": "Transaction reference",
+    "m": "The code that proves a payment, for example the M-Pesa message code. It is typed in when the payment is recorded.",
+    "w": "Payments"
+   },
+   {
+    "t": "Pending verification",
+    "m": "M-Pesa and card payments waiting for the cashier to confirm that the money really arrived.",
+    "w": "Pending Verification"
+   },
+   {
+    "t": "Verified",
+    "m": "The cashier or manager has checked the payment and confirmed the money is real.",
+    "w": "Payments"
+   },
+   {
+    "t": "Unverified / failed / disputed",
+    "m": "Unverified or failed: the money did not arrive or could not be confirmed. Disputed: someone says the amount is wrong and it is being looked at.",
+    "w": "Payments, Disputes"
+   },
+   {
+    "t": "Cash drop",
+    "m": "A waiter or bar attendant handing the cash they collected to the cashier. The cashier counts it and confirms it. Only then is the cash counted as received.",
+    "w": "Cash Drops"
+   },
+   {
+    "t": "Paybill",
+    "m": "The business M-Pesa number customers pay into. 'Total paybill amount' on the Daily Summary is all M-Pesa received for the day.",
+    "w": "Daily Summary"
+   }
+  ]
+ },
+ {
+  "title": "Cash and money (cashier and manager)",
+  "terms": [
+   {
+    "t": "Cash in hand",
+    "m": "The cash a cashier or person is holding right now: what they have received and not yet handed on.",
+    "w": "Cash in Hand"
+   },
+   {
+    "t": "Cash brought forward (B/F)",
+    "m": "Cash that was left over from the previous day and carried into today. It is yesterday's 'carried forward'.",
+    "w": "Daily Summary"
+   },
+   {
+    "t": "Cash collection for the day",
+    "m": "All cash the cashier received today: waiters' confirmed cash drops, cash taken directly, cash from functions and other income handed in.",
+    "w": "Daily Summary"
+   },
+   {
+    "t": "Total (cashier block)",
+    "m": "Cash brought forward plus today's cash collection. It is everything the cashier should have had available today.",
+    "w": "Daily Summary"
+   },
+   {
+    "t": "Expenses (petty cash)",
+    "m": "Small payments made out of cash during the day, for example buying charcoal. They need approval and reduce the cash the cashier holds.",
+    "w": "Petty Cash, Daily Summary"
+   },
+   {
+    "t": "Cash transferred to MD",
+    "m": "Cash the cashier handed to the MD during the day, recorded as a cash handover.",
+    "w": "Cash Handovers, Daily Summary"
+   },
+   {
+    "t": "Cash carried forward (C/F)",
+    "m": "What is left in the cashier's hands at the end of the day: total, minus expenses, minus cash given to the MD. It becomes tomorrow's 'brought forward'.",
+    "w": "Daily Summary"
+   },
+   {
+    "t": "Cash handover",
+    "m": "Moving cash from one person to another, for example the cashier giving cash to the MD. Both sides record it so the amount can be checked.",
+    "w": "Cash Handovers, My Handover"
+   },
+   {
+    "t": "Hand In Money",
+    "m": "A person who took other income (pool, playground, accommodation and so on) giving it to the cashier. The cashier confirms how much was really received.",
+    "w": "Hand In Money"
+   },
+   {
+    "t": "Other income",
+    "m": "Money from sources that are not food and drink sales, such as the swimming pool, playground and accommodation.",
+    "w": "Other Income"
+   },
+   {
+    "t": "Expected",
+    "m": "What a person should have collected, based on what the system recorded for them.",
+    "w": "Daily Summary, Shortages"
+   },
+   {
+    "t": "Declared",
+    "m": "The part of the expected money the person has accounted for: M-Pesa and card recorded, cash put into a cash drop, and signed bills the manager approved.",
+    "w": "Daily Summary"
+   },
+   {
+    "t": "Outstanding",
+    "m": "Expected money that has not yet been confirmed as received.",
+    "w": "Shortages"
+   },
+   {
+    "t": "Shortage",
+    "m": "Money the system expected from a person but was not received. It is carried forward until it is paid or cleared.",
+    "w": "Shortages, Daily Summary"
+   },
+   {
+    "t": "Shs M-Pesa / Shs cash / Card, other",
+    "m": "On the Daily Summary, the confirmed amounts received by each method. They only show money that has been verified.",
+    "w": "Daily Summary"
+   },
+   {
+    "t": "Signed bill (on the summary)",
+    "m": "Bills the MD signed and the manager approved. No cash was collected for them.",
+    "w": "Daily Summary"
+   },
+   {
+    "t": "Unsigned bills (on the summary)",
+    "m": "Bills still open at the end of the day, not yet paid and not signed.",
+    "w": "Daily Summary"
+   }
+  ]
+ },
+ {
+  "title": "Daily Summary (the accounting paper)",
+  "terms": [
+   {
+    "t": "Daily Summary",
+    "m": "The one-page record of the trading day: who sold what, what was received, the cashier's cash, stock values and shortages. It can be printed or exported to Excel.",
+    "w": "Daily Summary"
+   },
+   {
+    "t": "Person in charge",
+    "m": "The staff member responsible for that line, for example the waiter whose sales are shown.",
+    "w": "Daily Summary"
+   },
+   {
+    "t": "Account",
+    "m": "The department of the line, for example Restaurant, Bar, Swimming pool or Playground.",
+    "w": "Daily Summary"
+   },
+   {
+    "t": "Bar stock value / Store stock value",
+    "m": "The value of stock left at the end of the day, priced at selling price. They come from the stock sheet counts.",
+    "w": "Daily Summary"
+   },
+   {
+    "t": "B/F, Shortage, C/F (bottom table)",
+    "m": "For each person: what they owed from before (B/F), what they are short today, and the total still owed (C/F).",
+    "w": "Daily Summary"
+   },
+   {
+    "t": "Sign",
+    "m": "A person's signature on the line, to show they agree with the figures.",
+    "w": "Daily Summary"
+   },
+   {
+    "t": "Closed by / Acknowledged",
+    "m": "Closed: the supervisor or manager has finished the day and the figures are frozen. Acknowledged: the accountant or MD has seen and accepted it.",
+    "w": "Daily Summary"
+   },
+   {
+    "t": "Value summary",
+    "m": "A second page showing sales by stream (cash, kitchen store, bar, accommodation and extras), what was paid out, the amount expected from the cashier and the cash actually available, with the difference between them.",
+    "w": "Daily Summary"
+   },
+   {
+    "t": "Difference",
+    "m": "Expected from the cashier, minus the shortage, minus the cash the system says the cashier holds. It should be zero. If not, something is missing or recorded wrongly.",
+    "w": "Daily Summary"
+   }
+  ]
+ },
+ {
+  "title": "Stock",
+  "terms": [
+   {
+    "t": "Stock item",
+    "m": "Something the business keeps and counts: food, drink or supplies (soap, tissue and so on), at one branch.",
+    "w": "Stock Items"
+   },
+   {
+    "t": "Master item",
+    "m": "The single catalogue entry for a thing, shared by both branches. A stock item is that thing at one branch.",
+    "w": "Master Items"
+   },
+   {
+    "t": "Batch",
+    "m": "One delivery or one lot of a stock item, with its quantity, cost and date. Stock is counted by adding up batches.",
+    "w": "Batches"
+   },
+   {
+    "t": "Ledger",
+    "m": "The full history of every stock movement: in, out, wasted, returned, adjusted. Nothing is deleted from it.",
+    "w": "Stock → Ledger"
+   },
+   {
+    "t": "Balance",
+    "m": "How much of each item is in stock right now.",
+    "w": "Stock → Balance"
+   },
+   {
+    "t": "Opening",
+    "m": "The count at the start of the day.",
+    "w": "Stock Sheet"
+   },
+   {
+    "t": "Added / received",
+    "m": "Stock that came in during the day, for example a delivery or items sent from another store.",
+    "w": "Stock Sheet"
+   },
+   {
+    "t": "Issued",
+    "m": "Stock that left the store for the kitchen or the bar.",
+    "w": "Stock Sheet, Issue Slips"
+   },
+   {
+    "t": "Total",
+    "m": "Opening plus added: everything that was available during the day.",
+    "w": "Stock Sheet"
+   },
+   {
+    "t": "Closing",
+    "m": "The count at the end of the day.",
+    "w": "Stock Sheet"
+   },
+   {
+    "t": "Sale / used",
+    "m": "Total minus closing: what was sold or used up during the day.",
+    "w": "Stock Sheet"
+   },
+   {
+    "t": "P/U (price per unit)",
+    "m": "The selling price of one unit. It is used to value stock and sales on the stock sheet.",
+    "w": "Stock Sheet"
+   },
+   {
+    "t": "Stock sheet",
+    "m": "The paper-style daily count: opening, added, total, closing and sale for every item, with prices. Counted once a day.",
+    "w": "Stock Sheet, Bar Stock Sheet"
+   },
+   {
+    "t": "Stock take",
+    "m": "A full count of stock to compare with what the system says.",
+    "w": "Stock Takes"
+   },
+   {
+    "t": "Variance",
+    "m": "The difference between what the system says should be there and what was counted. A negative variance means something is missing.",
+    "w": "Variances"
+   },
+   {
+    "t": "Variance threshold",
+    "m": "How big a difference is allowed before it is flagged as a problem.",
+    "w": "Thresholds"
+   },
+   {
+    "t": "Reorder level / reorder list",
+    "m": "The lowest amount you want to keep. When stock falls to it, the item appears on the reorder list so more can be bought.",
+    "w": "Reorder List"
+   },
+   {
+    "t": "Issue slip / dispatch",
+    "m": "The paper that records the store giving stock to the kitchen or bar. The store prepares it and the receiver confirms it.",
+    "w": "Dispatch Queue, Issue Slips"
+   },
+   {
+    "t": "Bulk issue",
+    "m": "Sending a large quantity to the kitchen in one go, for example a sack of rice, and counting what is left when the day ends.",
+    "w": "Bulk Issues"
+   },
+   {
+    "t": "Purchase order",
+    "m": "A written order sent to a supplier for items to be bought.",
+    "w": "Purchase Orders"
+   },
+   {
+    "t": "Supplier",
+    "m": "A business that sells to you. The system tracks what was bought and what is owed.",
+    "w": "Suppliers"
+   },
+   {
+    "t": "Store types",
+    "m": "Food store (dry goods and ingredients), bar store (drinks) and kitchen (cooked food).",
+    "w": "Stock"
+   },
+   {
+    "t": "Portioned item",
+    "m": "Raw stock cut into servings, for example a kilogram of beef into portions.",
+    "w": "Portion Inventory"
+   },
+   {
+    "t": "Portion definition",
+    "m": "The size of one serving, for example 150 g, and its price.",
+    "w": "Portion Definitions"
+   },
+   {
+    "t": "Recipe",
+    "m": "What a menu item uses from stock each time it is sold. It is how the system takes stock down when something is sold.",
+    "w": "Recipes"
+   },
+   {
+    "t": "Produced item",
+    "m": "Food the kitchen makes in batches, such as chapati, mandazi or samosa. It is counted each morning and made during the day.",
+    "w": "Production"
+   },
+   {
+    "t": "Packaged item",
+    "m": "Something bought ready to sell, such as a soda.",
+    "w": "Stock Items"
+   },
+   {
+    "t": "Ingredient / supply",
+    "m": "Stock that is used in cooking or around the business and is not sold directly: onions, oil, soap, tissue.",
+    "w": "Stock Items"
+   },
+   {
+    "t": "Production batch",
+    "m": "A record of cooking a quantity of food, with what went in and what came out.",
+    "w": "Production"
+   },
+   {
+    "t": "Production variance",
+    "m": "The difference between what the recipe says should come out of a batch and what really did.",
+    "w": "Production → Variances"
+   },
+   {
+    "t": "Waste",
+    "m": "Stock that was spoiled, spilled or thrown away. It must be recorded with a reason.",
+    "w": "Waste, Bar Waste"
+   },
+   {
+    "t": "Return",
+    "m": "Stock sent back to the store or to a supplier.",
+    "w": "Returns"
+   },
+   {
+    "t": "Adjustment",
+    "m": "A correction to the stock figure, with a reason. It needs approval.",
+    "w": "Adjustments"
+   },
+   {
+    "t": "Transfer",
+    "m": "Moving stock from one store or branch to another.",
+    "w": "Transfers"
+   },
+   {
+    "t": "Staff meal",
+    "m": "Food given to staff. It is recorded so stock stays correct and the cost is known.",
+    "w": "Staff Meals"
+   },
+   {
+    "t": "Kitchen day",
+    "m": "What the kitchen was given, cooked and had left over for the day.",
+    "w": "Kitchen Day"
+   }
+  ]
+ },
+ {
+  "title": "The bar",
+  "terms": [
+   {
+    "t": "Bar stock",
+    "m": "Bottles, cans and other drinks held at the bar.",
+    "w": "Bar Stock"
+   },
+   {
+    "t": "Open bottle / measure",
+    "m": "A bottle that has been opened and is sold by the tot. Its measures say how many tots a bottle gives.",
+    "w": "Bar Stock"
+   },
+   {
+    "t": "Sell at the bar",
+    "m": "A direct sale by the bar attendant without a waiter.",
+    "w": "Sell at the Bar"
+   },
+   {
+    "t": "Bar handover",
+    "m": "The bar attendant handing over the counts and cash to the next person at the end of a shift.",
+    "w": "Bar Handover"
+   },
+   {
+    "t": "Bar count",
+    "m": "Counting the bar stock to compare with the system.",
+    "w": "Bar Count"
+   },
+   {
+    "t": "Bar to rooms",
+    "m": "Drinks taken to a guest's room and charged to the room.",
+    "w": "Bar to Rooms"
+   }
+  ]
+ },
+ {
+  "title": "Controls and checks",
+  "terms": [
+   {
+    "t": "Reconciliation",
+    "m": "Comparing two records that should agree, for example payments against cash, and listing any difference.",
+    "w": "Reconciliation"
+   },
+   {
+    "t": "Exception",
+    "m": "Something unusual the system flagged, such as a large discount or a missing count, for someone to review.",
+    "w": "Exceptions"
+   },
+   {
+    "t": "Dispute",
+    "m": "A disagreement about an amount or a payment, recorded and settled by a supervisor or manager.",
+    "w": "Disputes"
+   },
+   {
+    "t": "Audit log",
+    "m": "The permanent record of who did what and when. Nothing in it can be edited.",
+    "w": "Audit Log"
+   }
+  ]
+ },
+ {
+  "title": "Accounts and tax",
+  "terms": [
+   {
+    "t": "Accounts",
+    "m": "The accountant's books: income, expenses, suppliers and what is owed.",
+    "w": "Accounts"
+   },
+   {
+    "t": "Cost of sales",
+    "m": "What the food and drink that was sold cost the business to buy.",
+    "w": "Finance"
+   },
+   {
+    "t": "VAT",
+    "m": "Value added tax. It is included in the prices customers see. The MD can switch VAT on or off for the business.",
+    "w": "Money / Settings"
+   },
+   {
+    "t": "eTIMS",
+    "m": "The Kenya Revenue Authority system for electronic tax invoices. Each real sale is sent to KRA through it.",
+    "w": "eTIMS"
+   },
+   {
+    "t": "Events (functions)",
+    "m": "Bookings such as weddings or meetings with their own prices, payments and stock.",
+    "w": "Events"
+   },
+   {
+    "t": "Rooms and halls (venues)",
+    "m": "The rooms and halls that can be booked or used.",
+    "w": "Rooms and Halls"
+   }
+  ]
+ },
+ {
+  "title": "People and roles",
+  "terms": [
+   {
+    "t": "Waiter",
+    "m": "Takes orders, creates bills, takes payments and hands cash to the cashier.",
+    "w": ""
+   },
+   {
+    "t": "Bar attendant",
+    "m": "Issues drinks, sells at the bar, keeps bar stock and hands over at the end of a shift.",
+    "w": ""
+   },
+   {
+    "t": "Cashier",
+    "m": "Verifies M-Pesa and card payments, counts cash drops, receives hand-ins and keeps the cash.",
+    "w": ""
+   },
+   {
+    "t": "Supervisor",
+    "m": "Runs the floor, signs the Daily Summary and closes the day, and settles disputes.",
+    "w": ""
+   },
+   {
+    "t": "Manager (branch manager)",
+    "m": "Runs one branch: approvals, signed bills, adjustments, petty cash and closing the day.",
+    "w": ""
+   },
+   {
+    "t": "Store manager",
+    "m": "Controls the store: dispatch, issue slips, purchase orders and stock.",
+    "w": ""
+   },
+   {
+    "t": "MD",
+    "m": "The managing director. Sees both branches, receives cash and controls the main settings.",
+    "w": ""
+   },
+   {
+    "t": "Accountant",
+    "m": "Keeps the books and acknowledges the Daily Summary. Cannot change operations.",
+    "w": ""
+   },
+   {
+    "t": "Auditor",
+    "m": "Can look at everything but change nothing.",
+    "w": ""
+   },
+   {
+    "t": "Admin",
+    "m": "Looks after the system: users, properties, imports and settings.",
+    "w": ""
+   }
+  ]
+ }
+]
