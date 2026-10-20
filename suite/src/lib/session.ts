@@ -69,3 +69,8 @@ export function signOut() {
 
 export const lastTab = (): AppKey => (get(TAB) === 'inv' ? 'inv' : 'bkg')
 export const rememberTab = (t: AppKey) => set(TAB, t)
+
+/** Which app already has a saved login on this device (for the home screen's status dots) */
+export function appStatus(): Record<AppKey, boolean> {
+  return { inv: !!get('auth_token'), bkg: !!get('booking-admin-auth') }
+}

@@ -635,31 +635,6 @@ import { RefreshButton } from '@/components/RefreshButton'
 //   } as const
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { ReactNode, useState } from 'react'
 import {
   TextInput,
@@ -721,7 +696,7 @@ import {
   Scale,
   Search,
   Printer,
-  ClipboardCheck,
+  ClipboardCheck
 } from 'lucide-react'
 import {
   Link,
@@ -741,10 +716,10 @@ import { useBarPending } from '@/hooks/useOrders'
 import { useRemittances } from '@/hooks/useCashier'
 import { usePendingCashDrops } from '@/hooks/usePayments'
 import { useStoreQueue } from '@/hooks/useStore'
-import { appPath, pagePath } from '@/lib/utils/basePath';
+import { appPath, pagePath } from '@/lib/utils/basePath'
 
 // roles: which jobs the entry is for (MD and admin see all of them).
-// perm:  hide unless the user has one of these permissions — use the code the
+// perm:  hide unless the user has one of these permissions - use the code the
 //        page's API checks, so nobody is shown a page that answers 403.
 interface NavLeaf {
   type: 'leaf'
@@ -825,14 +800,31 @@ const navSections: { title: string; items: NavEntry[] }[] = [
         label: 'Sold Out',
         to: '/menu/sold-out',
         icon: <Ban size={18} />,
-        roles: ['store_manager', 'supervisor', 'manager', 'bar_attendant', 'md', 'admin']
+        roles: [
+          'store_manager',
+          'supervisor',
+          'manager',
+          'bar_attendant',
+          'md',
+          'admin'
+        ]
       },
       {
         type: 'leaf',
         label: 'Daily Summary',
         to: '/day-summary',
         icon: <FileSpreadsheet size={18} />,
-        roles: ['waiter', 'bar_attendant', 'cashier', 'supervisor', 'manager', 'md', 'admin', 'accountant', 'auditor']
+        roles: [
+          'waiter',
+          'bar_attendant',
+          'cashier',
+          'supervisor',
+          'manager',
+          'md',
+          'admin',
+          'accountant',
+          'auditor'
+        ]
       },
       {
         type: 'leaf',
@@ -853,7 +845,16 @@ const navSections: { title: string; items: NavEntry[] }[] = [
         label: 'Notifications',
         to: '/notifications',
         icon: <Bell size={18} />,
-        roles: ['manager', 'md', 'admin', 'waiter', 'bar_attendant', 'cashier', 'supervisor', 'store_manager']
+        roles: [
+          'manager',
+          'md',
+          'admin',
+          'waiter',
+          'bar_attendant',
+          'cashier',
+          'supervisor',
+          'store_manager'
+        ]
       },
       {
         type: 'leaf',
@@ -1113,7 +1114,12 @@ const navSections: { title: string; items: NavEntry[] }[] = [
         label: 'Approvals',
         to: '/approvals',
         // Managers decide; the MD only gets the notifications
-        perm: ['transfer.approve', 'bar.order.approve', 'adjustment.approve', 'stock_take.approve'],
+        perm: [
+          'transfer.approve',
+          'bar.order.approve',
+          'adjustment.approve',
+          'stock_take.approve'
+        ],
         icon: <CheckCircle2 size={18} />,
         roles: ['manager', 'admin']
       },
@@ -1154,7 +1160,12 @@ const navSections: { title: string; items: NavEntry[] }[] = [
           { type: 'leaf', label: 'Waste', to: '/waste' },
           { type: 'leaf', label: 'Returns', to: '/returns' },
           // Cash disputes between waiters and cashiers: not for the store
-          { type: 'leaf', label: 'Disputes', to: '/disputes', roles: ['supervisor', 'manager'] }
+          {
+            type: 'leaf',
+            label: 'Disputes',
+            to: '/disputes',
+            roles: ['supervisor', 'manager']
+          }
         ]
       }
     ]
@@ -1233,7 +1244,12 @@ const navSections: { title: string; items: NavEntry[] }[] = [
 ]
 
 // The accountant: the books, and the records behind them (read only)
-const leaf = (label: string, to: string, icon: ReactNode): NavEntry => ({ type: 'leaf', label, to, icon })
+const leaf = (label: string, to: string, icon: ReactNode): NavEntry => ({
+  type: 'leaf',
+  label,
+  to,
+  icon
+})
 const accountantSections: { title: string; items: NavEntry[] }[] = [
   {
     title: 'Books',
@@ -1264,9 +1280,19 @@ const accountantSections: { title: string; items: NavEntry[] }[] = [
 ]
 
 // MD / admin: overview first, then the money, then the rest
-const GROUP_SECTION_ORDER = ['Overview', 'Books', 'Finance', 'Sales', 'Operations', 'Store', 'Bar', 'Management']
+const GROUP_SECTION_ORDER = [
+  'Overview',
+  'Books',
+  'Finance',
+  'Sales',
+  'Operations',
+  'Store',
+  'Bar',
+  'Management'
+]
 const groupSections = [...navSections, accountantSections[0]].sort(
-  (a, b) => GROUP_SECTION_ORDER.indexOf(a.title) - GROUP_SECTION_ORDER.indexOf(b.title)
+  (a, b) =>
+    GROUP_SECTION_ORDER.indexOf(a.title) - GROUP_SECTION_ORDER.indexOf(b.title)
 )
 
 export function AppShell ({ children }: { children?: ReactNode }) {
@@ -1291,9 +1317,29 @@ export function AppShell ({ children }: { children?: ReactNode }) {
   const accountantOnly = auth.user.roles.every(r => r.code === 'accountant')
   const printOnly = auth.user.roles.every(r => r.code === 'print_station')
   const sections = printOnly
-    ? [{ title: 'Printing', items: [{ type: 'leaf', label: 'Print Station', to: '/print-station', icon: <Printer size={18} /> } as NavEntry] }]
-    : accountantOnly ? accountantSections : isGroupLevel ? groupSections : navSections
-  const canSee = (entry: { roles?: string[]; perm?: string[]; hideFor?: string[] }) => {
+    ? [
+        {
+          title: 'Printing',
+          items: [
+            {
+              type: 'leaf',
+              label: 'Print Station',
+              to: '/print-station',
+              icon: <Printer size={18} />
+            } as NavEntry
+          ]
+        }
+      ]
+    : accountantOnly
+    ? accountantSections
+    : isGroupLevel
+    ? groupSections
+    : navSections
+  const canSee = (entry: {
+    roles?: string[]
+    perm?: string[]
+    hideFor?: string[]
+  }) => {
     if (entry.hideFor?.some(r => auth.hasRole(r))) return false
     const roleOk =
       !entry.roles || isGroupLevel || entry.roles.some(r => auth.hasRole(r))
@@ -1304,11 +1350,31 @@ export function AppShell ({ children }: { children?: ReactNode }) {
   // Search: every page this person can open, matched on its name or its menu group
   const needle = navQ.trim().toLowerCase()
   const found = needle
-    ? sections.flatMap(sec => sec.items.filter(canSee).flatMap(it =>
-        it.type === 'leaf'
-          ? [{ to: it.to, label: it.label, icon: it.icon, where: sec.title }]
-          : it.children.filter(canSee).map(c => ({ to: c.to, label: c.label, icon: it.icon, where: `${sec.title} · ${it.label}` }))
-      )).filter(f => `${f.label} ${f.where}`.toLowerCase().includes(needle))
+    ? sections
+        .flatMap(sec =>
+          sec.items
+            .filter(canSee)
+            .flatMap(it =>
+              it.type === 'leaf'
+                ? [
+                    {
+                      to: it.to,
+                      label: it.label,
+                      icon: it.icon,
+                      where: sec.title
+                    }
+                  ]
+                : it.children
+                    .filter(canSee)
+                    .map(c => ({
+                      to: c.to,
+                      label: c.label,
+                      icon: it.icon,
+                      where: `${sec.title} · ${it.label}`
+                    }))
+            )
+        )
+        .filter(f => `${f.label} ${f.where}`.toLowerCase().includes(needle))
     : []
 
   const allLeafPaths = navSections.flatMap(section =>
@@ -1394,7 +1460,13 @@ export function AppShell ({ children }: { children?: ReactNode }) {
               to='/notifications'
               aria-label='Notifications'
               mr={4}
-              style={{ position: 'relative', padding: 8, borderRadius: 10, flexShrink: 0, color: '#495057' }}
+              style={{
+                position: 'relative',
+                padding: 8,
+                borderRadius: 10,
+                flexShrink: 0,
+                color: '#495057'
+              }}
             >
               <Bell size={20} />
               {!!unread.data?.unread && (
@@ -1448,7 +1520,9 @@ export function AppShell ({ children }: { children?: ReactNode }) {
                   <ChevronDown
                     size={14}
                     opacity={0.5}
-                    style={{ display: 'var(--mantine-hidden-from-sm-display, block)' }}
+                    style={{
+                      display: 'var(--mantine-hidden-from-sm-display, block)'
+                    }}
                   />
                 </Group>
               </UnstyledButton>
@@ -1487,16 +1561,33 @@ export function AppShell ({ children }: { children?: ReactNode }) {
             leftSection={<Search size={14} />}
             onKeyDown={e => {
               if (e.key === 'Escape') setNavQ('')
-              if (e.key === 'Enter' && found[0]) { navigate({ to: found[0].to }); setNavQ('') }
+              if (e.key === 'Enter' && found[0]) {
+                navigate({ to: found[0].to })
+                setNavQ('')
+              }
             }}
-            styles={{ input: { background: '#1e293b', border: '1px solid #334155', color: '#fff' } }}
+            styles={{
+              input: {
+                background: '#1e293b',
+                border: '1px solid #334155',
+                color: '#fff'
+              }
+            }}
           />
         </Box>
         <ScrollArea style={{ flex: 1 }} scrollbarSize={6} type='hover'>
           <Stack gap={0} p='sm'>
             {navQ.trim() && (
               <Stack gap={2}>
-                {found.length === 0 && <Text size='xs' px='sm' style={{ color: 'rgba(255,255,255,0.5)' }}>No page matches</Text>}
+                {found.length === 0 && (
+                  <Text
+                    size='xs'
+                    px='sm'
+                    style={{ color: 'rgba(255,255,255,0.5)' }}
+                  >
+                    No page matches
+                  </Text>
+                )}
                 {found.map(f => (
                   <NavLink
                     key={f.to}
@@ -1505,113 +1596,115 @@ export function AppShell ({ children }: { children?: ReactNode }) {
                     label={f.label}
                     description={f.where}
                     leftSection={f.icon}
-                    onClick={() => { setNavQ(''); close() }}
+                    onClick={() => {
+                      setNavQ('')
+                      close()
+                    }}
                     className='app-nav-link'
                     styles={navLinkStyles(false)}
                   />
                 ))}
               </Stack>
             )}
-            {!navQ.trim() && sections.map((section, sIdx) => {
-              const visibleItems = section.items.filter(item =>
-                canSee(item)
-              )
-              if (visibleItems.length === 0) return null
+            {!navQ.trim() &&
+              sections.map((section, sIdx) => {
+                const visibleItems = section.items.filter(item => canSee(item))
+                if (visibleItems.length === 0) return null
 
-              return (
-                <Box
-                  key={section.title}
-                  mb={sIdx === sections.length - 1 ? 0 : 4}
-                >
-                  <Text
-                    size='xs'
-                    fw={600}
-                    tt='uppercase'
-                    px='sm'
-                    pt={sIdx === 0 ? 4 : 16}
-                    pb={6}
-                    style={{
-                      letterSpacing: 1,
-                      color: 'rgba(255,255,255,0.4)'
-                    }}
+                return (
+                  <Box
+                    key={section.title}
+                    mb={sIdx === sections.length - 1 ? 0 : 4}
                   >
-                    {section.title}
-                  </Text>
+                    <Text
+                      size='xs'
+                      fw={600}
+                      tt='uppercase'
+                      px='sm'
+                      pt={sIdx === 0 ? 4 : 16}
+                      pb={6}
+                      style={{
+                        letterSpacing: 1,
+                        color: 'rgba(255,255,255,0.4)'
+                      }}
+                    >
+                      {section.title}
+                    </Text>
 
-                  <Stack gap={2}>
-                    {visibleItems.map(item => {
-                      if (item.type === 'leaf') {
-                        const active = activePath === item.to
+                    <Stack gap={2}>
+                      {visibleItems.map(item => {
+                        if (item.type === 'leaf') {
+                          const active = activePath === item.to
+                          return (
+                            <NavLink
+                              key={item.to}
+                              component={Link}
+                              to={item.to}
+                              label={item.label}
+                              leftSection={item.icon}
+                              rightSection={<NavPill tos={[item.to]} />}
+                              active={active}
+                              onClick={close}
+                              className='app-nav-link'
+                              styles={navLinkStyles(active)}
+                            />
+                          )
+                        }
+
+                        const childVisible = item.children.filter(c =>
+                          canSee(c)
+                        )
+                        if (childVisible.length === 0) return null
+
+                        const groupActive = childVisible.some(
+                          c => activePath === c.to
+                        )
+
                         return (
                           <NavLink
-                            key={item.to}
-                            component={Link}
-                            to={item.to}
+                            key={item.label}
                             label={item.label}
                             leftSection={item.icon}
-                            rightSection={<NavPill tos={[item.to]} />}
-                            active={active}
-                            onClick={close}
+                            defaultOpened={groupActive}
+                            active={groupActive}
                             className='app-nav-link'
-                            styles={navLinkStyles(active)}
-                          />
-                        )
-                      }
-
-                      const childVisible = item.children.filter(c =>
-                        canSee(c)
-                      )
-                      if (childVisible.length === 0) return null
-
-                      const groupActive = childVisible.some(
-                        c => activePath === c.to
-                      )
-
-                      return (
-                        <NavLink
-                          key={item.label}
-                          label={item.label}
-                          leftSection={item.icon}
-                          defaultOpened={groupActive}
-                          active={groupActive}
-                          className='app-nav-link'
                             styles={navLinkStyles(groupActive)}
-                          rightSection={
-                            <Group gap={6} wrap='nowrap'>
-                              <NavPill tos={childVisible.map(c => c.to)} />
-                              <ChevronRight
-                                size={14}
-                                style={{
-                                  transition: 'transform 150ms ease',
-                                  opacity: 0.5
-                                }}
-                              />
-                            </Group>
-                          }
-                        >
-                          {childVisible.map(child => {
-                            const active = activePath === child.to
-                            return (
-                              <NavLink
-                                key={child.to}
-                                component={Link}
-                                to={child.to}
-                                label={child.label}
-                                rightSection={<NavPill tos={[child.to]} />}
-                                active={active}
-                                onClick={close}
-                                className='app-nav-link'
-                                styles={subNavLinkStyles(active)}
-                              />
-                            )
-                          })}
-                        </NavLink>
-                      )
-                    })}
-                  </Stack>
-                </Box>
-              )
-            })}
+                            rightSection={
+                              <Group gap={6} wrap='nowrap'>
+                                <NavPill tos={childVisible.map(c => c.to)} />
+                                <ChevronRight
+                                  size={14}
+                                  style={{
+                                    transition: 'transform 150ms ease',
+                                    opacity: 0.5
+                                  }}
+                                />
+                              </Group>
+                            }
+                          >
+                            {childVisible.map(child => {
+                              const active = activePath === child.to
+                              return (
+                                <NavLink
+                                  key={child.to}
+                                  component={Link}
+                                  to={child.to}
+                                  label={child.label}
+                                  rightSection={<NavPill tos={[child.to]} />}
+                                  active={active}
+                                  onClick={close}
+                                  className='app-nav-link'
+                                  styles={subNavLinkStyles(active)}
+                                />
+                              )
+                            })}
+                          </NavLink>
+                        )
+                      })}
+                    </Stack>
+                  </Box>
+                )
+              })}
           </Stack>
         </ScrollArea>
 
@@ -1699,4 +1792,3 @@ function subNavLinkStyles (active: boolean) {
     label: { fontSize: 13 }
   } as const
 }
-

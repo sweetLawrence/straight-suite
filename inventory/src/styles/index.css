@@ -209,7 +209,7 @@ body {
     display: none !important;
   }
 
-  /* Thermal 80mm — narrow roll */
+  /* Thermal 80mm - narrow roll */
   @page {
     size: 80mm auto;
     margin: 3mm;
@@ -225,7 +225,7 @@ body {
 }
 
 /* For A4 printers, remove the @page override by targeting a specific class
-   (optional — if you later want per-printer classes) */
+   (optional - if you later want per-printer classes) */
 
 
 

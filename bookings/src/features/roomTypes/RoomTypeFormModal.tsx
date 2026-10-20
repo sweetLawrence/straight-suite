@@ -162,25 +162,6 @@
 // //   )
 // // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import { Modal, TextInput, Textarea, NumberInput, Select, Button, Group, Stack, SimpleGrid, TagsInput } from '@mantine/core'
 // import { useForm } from '@mantine/form'
 // import { notifications } from '@mantine/notifications'
@@ -310,24 +291,19 @@
 //   )
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import { Modal, TextInput, Textarea, NumberInput, Select, Button, Group, Stack, SimpleGrid, TagsInput, Text } from '@mantine/core'
+import {
+  Modal,
+  TextInput,
+  Textarea,
+  NumberInput,
+  Select,
+  Button,
+  Group,
+  Stack,
+  SimpleGrid,
+  TagsInput,
+  Text
+} from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { notifications } from '@mantine/notifications'
 import { useEffect } from 'react'
@@ -340,22 +316,36 @@ interface Props {
   roomType: RoomType | null
 }
 
-export default function RoomTypeFormModal({ opened, onClose, roomType }: Props) {
+export default function RoomTypeFormModal ({
+  opened,
+  onClose,
+  roomType
+}: Props) {
   const createRoomType = useCreateRoomType()
   const updateRoomType = useUpdateRoomType()
   const isEdit = !!roomType
 
   const form = useForm({
     initialValues: {
-      name: '', description: '', bedType: 'double', bedConfiguration: '',
-      maxAdults: 2, maxChildren: 0, totalUnits: 1, basePrice: 0,
-      tagline: '', amenities: [] as string[]
+      name: '',
+      description: '',
+      bedType: 'double',
+      bedConfiguration: '',
+      maxAdults: 2,
+      maxChildren: 0,
+      totalUnits: 1,
+      basePrice: 0,
+      tagline: '',
+      amenities: [] as string[]
     }
   })
 
   useEffect(() => {
     if (roomType) {
-      const attributes = (roomType.attributes ?? {}) as { tagline?: string; amenities?: string[] }
+      const attributes = (roomType.attributes ?? {}) as {
+        tagline?: string
+        amenities?: string[]
+      }
       form.setValues({
         name: roomType.name,
         description: roomType.description ?? '',
@@ -374,7 +364,7 @@ export default function RoomTypeFormModal({ opened, onClose, roomType }: Props) 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomType, opened])
 
-  function handleSubmit(values: typeof form.values) {
+  function handleSubmit (values: typeof form.values) {
     const payload = {
       name: values.name,
       description: values.description,
@@ -393,61 +383,106 @@ export default function RoomTypeFormModal({ opened, onClose, roomType }: Props) 
 
     mutation
       .then(() => {
-        notifications.show({ message: `Room type ${isEdit ? 'updated' : 'created'}.`, color: 'green' })
+        notifications.show({
+          message: `Room type ${isEdit ? 'updated' : 'created'}.`,
+          color: 'green'
+        })
         onClose()
       })
-      .catch((err) => notifications.show({ message: err.message, color: 'red' }))
+      .catch(err => notifications.show({ message: err.message, color: 'red' }))
   }
 
   return (
-    <Modal opened={opened} onClose={onClose} title={isEdit ? 'Edit Room Type' : 'New Room Type'} size="md">
+    <Modal
+      opened={opened}
+      onClose={onClose}
+      title={isEdit ? 'Edit Room Type' : 'New Room Type'}
+      size='md'
+    >
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
-          <TextInput label="Name" placeholder="Deluxe Room" {...form.getInputProps('name')} required />
+          <TextInput
+            label='Name'
+            placeholder='Deluxe Room'
+            {...form.getInputProps('name')}
+            required
+          />
 
           {isEdit && roomType && (
-            <Text size="xs" c="dimmed">
-              Public URL slug: <code>{roomType.slug}</code> — set automatically from the name at creation, doesn't change on rename.
+            <Text size='xs' c='dimmed'>
+              Public URL slug: <code>{roomType.slug}</code> - set automatically
+              from the name at creation, doesn't change on rename.
             </Text>
           )}
 
           <TextInput
-            label="Tagline"
-            placeholder="A quiet room opening straight onto the flower beds."
-            description="Short one-liner shown on the room card and detail page"
+            label='Tagline'
+            placeholder='A quiet room opening straight onto the flower beds.'
+            description='Short one-liner shown on the room card and detail page'
             {...form.getInputProps('tagline')}
           />
 
-          <Textarea label="Description" {...form.getInputProps('description')} minRows={3} />
+          <Textarea
+            label='Description'
+            {...form.getInputProps('description')}
+            minRows={3}
+          />
 
           <TagsInput
-            label="Amenities"
-            placeholder="Type an amenity and press Enter"
-            description="e.g. Garden View, Free Wi-Fi, Breakfast Included"
+            label='Amenities'
+            placeholder='Type an amenity and press Enter'
+            description='e.g. Garden View, Free Wi-Fi, Breakfast Included'
             {...form.getInputProps('amenities')}
           />
 
           <SimpleGrid cols={3}>
-            <Select label="Bed type" data={BED_TYPES} {...form.getInputProps('bedType')} />
-            <NumberInput label="Max adults" min={1} {...form.getInputProps('maxAdults')} />
-            <NumberInput label="Max children" min={0} {...form.getInputProps('maxChildren')} />
+            <Select
+              label='Bed type'
+              data={BED_TYPES}
+              {...form.getInputProps('bedType')}
+            />
+            <NumberInput
+              label='Max adults'
+              min={1}
+              {...form.getInputProps('maxAdults')}
+            />
+            <NumberInput
+              label='Max children'
+              min={0}
+              {...form.getInputProps('maxChildren')}
+            />
           </SimpleGrid>
 
           <TextInput
-            label="Bed configuration (optional override)"
-            placeholder="e.g. 1 Queen + 1 Single"
-            description="Leave blank to just show the bed type above"
+            label='Bed configuration (optional override)'
+            placeholder='e.g. 1 Queen + 1 Single'
+            description='Leave blank to just show the bed type above'
             {...form.getInputProps('bedConfiguration')}
           />
 
           <SimpleGrid cols={2}>
-            <NumberInput label="Total units" min={1} {...form.getInputProps('totalUnits')} />
-            <NumberInput label="Base price" min={0} decimalScale={2} {...form.getInputProps('basePrice')} />
+            <NumberInput
+              label='Total units'
+              min={1}
+              {...form.getInputProps('totalUnits')}
+            />
+            <NumberInput
+              label='Base price'
+              min={0}
+              decimalScale={2}
+              {...form.getInputProps('basePrice')}
+            />
           </SimpleGrid>
 
-          <Group justify="flex-end" mt="sm">
-            <Button variant="default" onClick={onClose}>Cancel</Button>
-            <Button type="submit" color="primary" loading={createRoomType.isPending || updateRoomType.isPending}>
+          <Group justify='flex-end' mt='sm'>
+            <Button variant='default' onClick={onClose}>
+              Cancel
+            </Button>
+            <Button
+              type='submit'
+              color='primary'
+              loading={createRoomType.isPending || updateRoomType.isPending}
+            >
               {isEdit ? 'Save Changes' : 'Create Room Type'}
             </Button>
           </Group>

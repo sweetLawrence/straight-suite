@@ -6,7 +6,7 @@
 //   try {
 //     const update = await check()
 
-//     // No update — silently continue
+//     // No update - silently continue
 //     if (!update) {
 //       return
 //     }
@@ -33,36 +33,6 @@
 //   }
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { check } from '@tauri-apps/plugin-updater'
 import { relaunch } from '@tauri-apps/plugin-process'
 
@@ -82,7 +52,7 @@ export interface UpdateProgress {
   percentage: number
 }
 
-export async function checkForUpdates(
+export async function checkForUpdates (
   onProgress: (progress: UpdateProgress) => void
 ) {
   try {
@@ -119,7 +89,7 @@ export async function checkForUpdates(
       percentage: 0
     })
 
-    await update.downloadAndInstall((event) => {
+    await update.downloadAndInstall(event => {
       switch (event.event) {
         case 'Started': {
           total = event.data.contentLength ?? 0

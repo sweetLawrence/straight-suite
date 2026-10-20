@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { SUITE_URL } from '../lib/config'
+import { Logo } from './Icons'
 
 /** Windows app only: update check, then open the website (sign-in and the two apps live there). */
 export default function StartPage() {
@@ -35,17 +36,18 @@ export default function StartPage() {
   }
 
   return (
-    <div className="center">
-      <div className="box">
+    <div className="startwrap">
+      <div className="startcard">
+        <Logo size={56} />
         <h1>Straight Suite</h1>
-        <p className="sub">Inventory and Bookings in one place</p>
+        <p className="lead">Bookings and Inventory in one place.</p>
         {version && (
           <div className="upd">
-            <span>A new version ({version}) is ready.</span>
+            <span>Version {version} is ready.</span>
             <button type="button" onClick={update} disabled={updating}>{updating ? 'Updating...' : 'Update now'}</button>
           </div>
         )}
-        <button className="main" type="button" onClick={open} disabled={busy}>Open Straight Suite</button>
+        <button className="primary" type="button" onClick={open} disabled={busy}>{busy ? 'Opening...' : 'Open Straight Suite'}</button>
         <div className="msg" role="status">{msg}</div>
       </div>
     </div>
