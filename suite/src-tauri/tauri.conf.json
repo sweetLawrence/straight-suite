@@ -38,7 +38,7 @@
   },
   "plugins": {
     "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDIxRkEzQ0EwNUNEMEEyRDEKUldUUm90QmNvRHo2SWF5UTN5Vk5BMjBnbkNPWmlNQlJlSUJNVGgrNmpBQ28xRG52Rkt5SXpXcC8K",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IERBMTc5QzU2OEExRkU3M0UKUldRKzV4K0tWcHdYMmdPUDZ4QjVMZHY4UTlUVUkrUit3R3hadlJYYzNNRUhPWE1PNjlhQjRPZUQK",
       "endpoints": [
         "https://updates.mumsgarden.co.ke/latest.json"
       ]

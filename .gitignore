@@ -8,3 +8,5 @@ gateway
 .env.local
 *.log
 .DS_Store
+*.key
+.tauri/
