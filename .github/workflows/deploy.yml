@@ -44,13 +44,13 @@ jobs:
         if: ${{ env.VERCEL_TOKEN != '' }}
         run: npx --yes vercel deploy gateway --prod --yes --token "$VERCEL_TOKEN"
 
-      # Turn on later: set the repo variable DEPLOY_CPANEL to true and add FTP_HOST, FTP_USERNAME, FTP_PASSWORD secrets
+      # Turn on later: set the repo variable DEPLOY_CPANEL to true and add WEB_FTP_HOST, WEB_FTP_USERNAME, WEB_FTP_PASSWORD secrets (the website's own FTP account, not the updates one)
       - name: Publish to the cPanel domain
         if: ${{ vars.DEPLOY_CPANEL == 'true' }}
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
+          server: ${{ secrets.WEB_FTP_HOST }}
+          username: ${{ secrets.WEB_FTP_USERNAME }}
+          password: ${{ secrets.WEB_FTP_PASSWORD }}
           server-dir: ${{ vars.CPANEL_DIR || './' }}
           local-dir: gateway/
