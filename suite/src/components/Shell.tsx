@@ -6,6 +6,7 @@ const APPS: { key: AppKey; label: string; dot: string; src: string; shortcut: st
   { key: 'inv', label: 'Inventory', dot: '#7FB0F0', src: '/inventory/', shortcut: '2' },
 ]
 
+
 const POS = 'suite_dock_pos'
 
 const Calendar = () => (
