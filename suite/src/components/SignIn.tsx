@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { signIn } from '../lib/session'
+import { Backdrop } from './Hud'
 import { Logo } from './Icons'
 
 export default function SignIn({ onDone }: { onDone: (name: string, problems: string[]) => void }) {
@@ -23,43 +24,35 @@ export default function SignIn({ onDone }: { onDone: (name: string, problems: st
   }
 
   return (
-    <div className="auth">
-      <aside className="panel">
-        <div className="brand"><Logo size={40} /><span>Straight Group</span></div>
-        <div className="sky">
-          <div className="sun" />
-          <h1>One sign-in.<br />Both systems.</h1>
-        </div>
-        <div className="horizon" />
-        <p className="below">Bookings for rooms and guests, Inventory for orders, stock and cash. Run for Mums&rsquo; Garden Resort and Centurion Hotel.</p>
-      </aside>
+    <div className="page authpage">
+      <Backdrop />
+      <div className="authbrand rise"><Logo size={44} /><div><b>Straight Suite</b><span>Straight Group</span></div></div>
 
-      <main className="formside">
-        <div className="mobilebrand"><Logo size={36} /><span>Straight Group</span></div>
-        <form className="signform" onSubmit={submit}>
-          <h2>Sign in</h2>
-          <p className="lead">Use your work email and password.</p>
+      <form className={`authcard rise${error ? ' shake' : ''}`} style={{ animationDelay: '.1s' }} onSubmit={submit}>
+        <h2>Welcome back</h2>
+        <p className="sub">Sign in once to use Bookings and Inventory.</p>
 
-          {error && (
-            <div className="alert" role="alert">
-              <b>Could not sign in</b>
-              {error.split(' | ').map((l) => <span key={l}>{l}</span>)}
-            </div>
-          )}
-
-          <label htmlFor="em">Email</label>
-          <input id="em" type="text" inputMode="email" autoComplete="username" autoCapitalize="none" spellCheck={false} required autoFocus value={email} onChange={(e) => setEmail(e.target.value)} />
-
-          <label htmlFor="pw">Password</label>
-          <div className="pwrow">
-            <input id="pw" type={show ? 'text' : 'password'} autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} />
-            <button type="button" className="reveal" onClick={() => setShow((s) => !s)} aria-pressed={show}>{show ? 'Hide' : 'Show'}</button>
+        {error && (
+          <div className="alert" role="alert">
+            <b>Could not sign in</b>
+            {error.split(' | ').map((l) => <span key={l}>{l}</span>)}
           </div>
+        )}
 
-          <button className="primary" type="submit" disabled={busy}>{busy ? 'Signing in...' : 'Sign in'}</button>
-          <p className="help">Trouble signing in? Ask your administrator.</p>
-        </form>
-      </main>
+        <label htmlFor="em">Email</label>
+        <input id="em" type="text" inputMode="email" autoComplete="username" autoCapitalize="none" spellCheck={false} required autoFocus value={email} onChange={(e) => setEmail(e.target.value)} />
+
+        <label htmlFor="pw">Password</label>
+        <div className="pwrow">
+          <input id="pw" type={show ? 'text' : 'password'} autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+          <button type="button" className="reveal" onClick={() => setShow((s) => !s)} aria-pressed={show}>{show ? 'Hide' : 'Show'}</button>
+        </div>
+
+        <button className="primary" type="submit" disabled={busy}>{busy ? 'Signing in...' : 'Sign in'}</button>
+        <p className="help">Trouble signing in? Ask your administrator.</p>
+        {busy && <i className="progress" />}
+      </form>
+      <p className="foot">Mums&rsquo; Garden Resort &nbsp;&middot;&nbsp; Centurion Hotel</p>
     </div>
   )
 }
